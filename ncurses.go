@@ -51,7 +51,7 @@ var global struct {
 	sync.Mutex
 
 	isInitialized bool
-	sigwinch      chan os.Signal
+	signals       chan os.Signal
 }
 
 // Beep is used to alert the terminal user.  The function sounds an
@@ -64,8 +64,8 @@ func Beep() {
 // EndWin must be called before the program exits, in order to restore
 // the terminal to a usable state.
 func EndWin() {
-	signal.Stop(global.sigwinch)
-	close(global.sigwinch)
+	signal.Stop(global.signals)
+	close(global.signals)
 
 	C.endwin()
 
@@ -89,25 +89,35 @@ func Init() *Window {
 	}
 	global.isInitialized = true
 
-	// The signal handler must be installed before term_init() is called.
-	global.sigwinch = make(chan os.Signal, 1)
-	signal.Notify(global.sigwinch, syscall.SIGWINCH)
+	// The signal handlers must be installed before term_init() is called.
+	global.signals = make(chan os.Signal, 1)
+	signal.Notify(global.signals,
+		syscall.SIGCONT,
+		syscall.SIGTSTP,
+		syscall.SIGWINCH)
 
 	res := &Window{
 		ptr:     C.term_init(),
 		timeout: -1,
 	}
 
-	go handleSigwinch()
+	go signalHandler()
 
 	return res
 }
 
-func handleSigwinch() {
-	for range global.sigwinch {
-		ws, err := unix.IoctlGetWinsize(syscall.Stdout, unix.TIOCGWINSZ)
-		if err == nil {
-			C.resizeterm(C.int(ws.Row), C.int(ws.Col))
+func signalHandler() {
+	for sig := range global.signals {
+		switch sig {
+		case syscall.SIGWINCH:
+			ws, err := unix.IoctlGetWinsize(syscall.Stdout, unix.TIOCGWINSZ)
+			if err == nil {
+				C.resizeterm(C.int(ws.Row), C.int(ws.Col))
+			}
+		case syscall.SIGTSTP:
+			C.endwin()
+		case syscall.SIGCONT:
+			C.doupdate()
 		}
 	}
 }
