@@ -19,7 +19,7 @@
 package main
 
 import (
-	"github.com/seehuhn/vocab/ncurses"
+	"seehuhn.de/go/ncurses"
 )
 
 func main() {

@@ -18,7 +18,7 @@
 
 package main
 
-import "github.com/seehuhn/vocab/ncurses"
+import "seehuhn.de/go/ncurses"
 
 func main() {
 	win := ncurses.Init()

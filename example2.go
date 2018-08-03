@@ -22,7 +22,7 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/seehuhn/vocab/ncurses"
+	"seehuhn.de/go/ncurses"
 )
 
 func rgb(alpha float64) (int, int, int) {
@@ -71,6 +71,7 @@ func main() {
 		}
 		win.Println()
 		for i, entry := range table {
+			// ColorPair(0) are the default colours
 			cp := ncurses.ColorPair(i + 1)
 			cp.Init(entry.Col, ncurses.ColorBlack)
 			win.AttrOn(cp.AsAttr())
@@ -78,7 +79,7 @@ func main() {
 		}
 	}
 
-	k := numColors - 8
+	k := numColors - 16
 	if k > numPairs-8 {
 		k = numPairs - 8
 	}
@@ -89,7 +90,7 @@ func main() {
 	if k > 1 {
 		win.Println()
 		for i := 0; i < k; i++ {
-			col := ncurses.Color(i + 8)
+			col := ncurses.Color(i + 16)
 			r, g, b := rgb(float64(i) / float64(k))
 			col.Init(r, g, b)
 			cp := ncurses.ColorPair(i + 8)
