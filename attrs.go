@@ -1,4 +1,4 @@
-// attrs.go - screen attribute handling for the ncurses package
+// seehuhn.de/go/ncurses - a Go-wrapper for the ncurses library
 // Copyright (C) 2018  Jochen Voss <voss@seehuhn.de>
 //
 // This program is free software: you can redistribute it and/or modify
@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 package ncurses
 
