@@ -42,6 +42,13 @@ func (w *Window) Erase() {
 	C.werase(w.ptr)
 }
 
+// ClrToBot erases from the cursor to the end of screen.  That is, the
+// functions all lines below the cursor in the window.  Also, the
+// current line to the right of the cursor, inclusive, is erased.
+func (w *Window) ClrToBot() {
+	C.wclrtobot(w.ptr)
+}
+
 // ClrToEol erases the current line to the right of the cursor,
 // inclusive, to the end of the current line.
 func (w *Window) ClrToEol() {
