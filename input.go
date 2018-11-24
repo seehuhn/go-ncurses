@@ -151,8 +151,12 @@ func (w *Window) Readline(maxLen int) string {
 				k := pos
 				if k > len(res)-1 {
 					k = len(res) - 1
+				} else {
+					pos = k + 1
 				}
 				res[k-1], res[k] = res[k], res[k-1]
+			} else {
+				Beep()
 			}
 		} else if c == 27 {
 			delay := w.GetTimeout()
