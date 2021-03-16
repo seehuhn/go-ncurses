@@ -17,7 +17,8 @@
 package ncurses
 
 // #cgo CFLAGS: -D_XOPEN_SOURCE -D_XOPEN_SOURCE_EXTENDED
-// #cgo LDFLAGS: -lncurses
+// #cgo !darwin LDFLAGS: -lncursesw
+// #cgo darwin LDFLAGS: -lncurses
 //
 // #include <locale.h>
 // #include <ncurses.h>
