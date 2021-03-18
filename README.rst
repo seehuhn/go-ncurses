@@ -12,8 +12,8 @@ Usage
 -----
 
 Documentation is available via the package's online help, either on
-godoc.org_ or on the command line::
+pkg.go.dev_ or on the command line::
 
     godoc seehuhn.de/go/ncurses
 
-.. _godoc.org: https://godoc.org/seehuhn.de/go/ncurses
+.. _pkg.go.dev: https://pkg.go.dev/seehuhn.de/go/ncurses

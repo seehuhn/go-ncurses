@@ -37,7 +37,7 @@ func (w *Window) Refresh() {
 
 // Erase copies blanks to every position in the window, thus clearing
 // the window.  The blanks created by Erase() have the current
-// background rendition, as set by BkgdSet(), merged into them.
+// background rendition, as set by SetBackground(), merged into them.
 func (w *Window) Erase() {
 	C.werase(w.ptr)
 }
@@ -56,7 +56,7 @@ func (w *Window) ClrToEol() {
 }
 
 // Move changes the current cursor position of the window.  The
-// arguments indicate the row (y) and column (x) of the new cursor
+// arguments indicate the row y and column x of the new cursor
 // position.
 func (w *Window) Move(y, x int) {
 	C.wmove(w.ptr, C.int(y), C.int(x))

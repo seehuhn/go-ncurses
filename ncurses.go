@@ -151,18 +151,18 @@ func NewWin(nLines, nCols, beginY, beginX int) *Window {
 // ScrollOk controls what happens when the cursor of a window is moved
 // off the edge of the window or scrolling region, either as a result
 // of a newline action on the bottom line, or typing the last
-// character of the last line.  If disabled, (bf is `false`), the cursor
-// is left on the bottom line.  If enabled, (bf is `true`), the window
-// is scrolled up one line (Note that to get the physical scrolling
-// effect on the terminal, it is also necessary to call IdlOk).
+// character of the last line.  If disabled (bf is `false`), the cursor
+// is left on the bottom line.  If enabled (bf is `true`), the window
+// is scrolled up one line.  Note that to get the physical scrolling
+// effect on the terminal, it is also necessary to call IdlOk().
 func (w *Window) ScrollOk(bf bool) {
 	C.scrollok(w.ptr, C.bool(bf))
 }
 
 // IdlOk can be used to allow curses to use the insert/delete line
-// feature of terminals so equipped.  If IdlOk is called with `true`
-// as second argument, curses considers using insert/delete line.
-// Calling idlok with `false` as second argument disables use of line
+// feature of terminals so equipped.  If IdlOk() is called with `true`
+// as the argument, curses considers using insert/delete line.
+// Calling IdlOk() with `false` as the argument disables use of line
 // insertion and deletion.  This option should be enabled only if the
 // application needs insert/delete line, for example, for a screen
 // editor.  It is disabled by default because insert/delete line tends
@@ -198,19 +198,18 @@ func (w *Window) GetMaxYX() (int, int) {
 	return int(y), int(x)
 }
 
-// SetBackground manipulates the background of the named window.  The
-// window background consists of a combination of attributes (i.e.,
-// rendition) and a complex character.  The attribute part of the
-// background is combined (or'ed) with all non-blank characters that
-// are written into the window.  Both the character and attribute
-// parts of the background are combined with the blank characters.
-// The background becomes a property of the character and moves with
-// the character through any scrolling and insert/delete
-// line/character operations.
+// SetBackground manipulates the background of the named window.  The window
+// background consists of a combination of attributes (i.e., rendition) and a
+// complex character.  The attribute part of the background is combined with
+// all non-blank characters that are written into the window.  Both the
+// character and attribute parts of the background are combined with blank
+// characters. The background becomes a property of the character and moves
+// with the character through any scrolling and insert/delete line/character
+// operations.
 //
-// To the extent possible on a particular terminal, the attribute part
-// of the background is displayed as the graphic rendition of the
-// character put on the screen.
+// To the extent possible on a particular terminal, the attribute part of the
+// background is displayed as the graphic rendition of the character put on the
+// screen.
 func (w *Window) SetBackground(char string, attrs AttrType, colorPair ColorPair) {
 	var c C.cchar_t
 	wch := stringToC(char)
