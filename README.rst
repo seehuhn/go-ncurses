@@ -1,6 +1,11 @@
 Ncurses
 =======
 
+This Go package is a wrapper for the ncurses library.  It provides
+access to the ncurses terminal handling library functions.
+To use the Go package, you need to have the ncurses library installed.
+This must include the header files and the shared library.
+
 Installation
 ------------
 

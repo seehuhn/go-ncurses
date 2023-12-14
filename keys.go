@@ -168,7 +168,7 @@ var keyLookup map[C.int]rune = map[C.int]rune{
 	C.KEY_ENTER:     KeyEnter,
 	C.KEY_EOL:       KeyEol,
 	C.KEY_EOS:       KeyEos,
-	C.KEY_EVENT:     KeyEvent,
+	// C.KEY_EVENT:     KeyEvent,
 	C.KEY_EXIT:      KeyExit,
 	C.KEY_F0 + 10:   KeyF10,
 	C.KEY_F0 + 11:   KeyF11,
