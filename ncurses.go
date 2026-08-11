@@ -30,6 +30,7 @@ package ncurses
 //     setlocale(LC_ALL, "");
 //     scr = initscr();
 //     start_color();
+//     use_default_colors();
 //
 //     cbreak();
 //     noecho();

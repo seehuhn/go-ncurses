@@ -23,6 +23,12 @@ import "C"
 // ncurses.
 type Color int
 
+// ColorDefault represents the terminal's default foreground or
+// background color, as opposed to the palette colors defined below.
+// On terminals which do not support default colors, using
+// ColorDefault in ColorPair.Init() results in an error.
+var ColorDefault Color = -1
+
 // These constants define default colors, corresponding to color
 // values 0, 1, ..., 7.  Additional color values in the range 8, ...,
 // NumColors()-1 can be used after initializing them with
